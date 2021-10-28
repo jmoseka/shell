@@ -72,7 +72,7 @@ wait4 (man 2 wait4)
 write (man 2 write)
 Documentation
 Download
-You can clone this repository this way: git clone https://github.com/nathsotomayor/simple_shell.git
+
 
 Compilation
 Your shell will be compiled this way:
@@ -130,4 +130,3 @@ Ken Thompson
 man or help:
 
 sh (Run sh as well)
-
