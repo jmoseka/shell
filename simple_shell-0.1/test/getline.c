@@ -10,7 +10,7 @@ int main(void)
 
 	nread = getline(&line, &len, stdin);
 	if(!nread)
-		return (-1);
-	printf("line read: %s", line);
+	return (-1);
+	printf("Line read: %s", line);
 	return (0);
 }
