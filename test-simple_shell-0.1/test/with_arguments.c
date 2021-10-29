@@ -6,7 +6,7 @@ int main(int argc, char *argv[])
 
 	for (i = 1; i < argc; i++)
 	{
-		printf("argc = %s \n", argv[i]);
+		printf("argument = %s \n", argv[i]);
 	}
 
 
