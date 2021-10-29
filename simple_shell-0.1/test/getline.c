@@ -9,7 +9,7 @@ int main(void)
 	ssize_t nread = 0;
 
 	nread = getline(&line, &len, stdin);
-	if(!nread)
+	if(nread == -1)
 	return (-1);
 	printf("Line read: %s", line);
 	return (0);
