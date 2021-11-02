@@ -33,8 +33,8 @@ julien@ubuntu:~/c/shell$ ./getppid
 julien@ubuntu:~/c/shell$ 
 ```
 
-## Promt 
-### File promt.c
+## 2. Promt 
+### File: promt.c
 Uses function getline. 
 
 getline()  reads  an  entire  line  from  stream,  storing  the address of the buffer containing the text into
@@ -81,4 +81,53 @@ Length of input read from commandline: 5
 Length of actual input(newline + null terminator): 6
 vagrant@ubuntu-focal:~/simple_shell/concepts$
 ```
+## 3. strok() function
+### File: strok.c
+strtok() function is used to split a string into a series of tokens based on a particular delimiter. A token is a substring extracted from the original string.
+The user input from command line is tokenized to establish paths, commands , etc  The  strtok()  function  breaks  a string into a sequence of zero or more nonempty tokens.  On the first call to strtok(), the string to be parsed should be
+       specified in str.  In each subsequent call that should parse the same string, str must be NULL.
 
+       The delim argument specifies a set of bytes that delimit the tokens in the parsed string.  The caller may specify different strings in delim  in  successive
+       calls that parse the same string.
+
+       Each  call  to  strtok()  returns a pointer to a null-terminated string containing the next token.  This string does not include the delimiting byte.  If no
+       more tokens are found, strtok() returns NULL.
+       
+
+```vagrant@ubuntu-focal:~/simple_shell/concepts$ cat strok.c
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+int main ()
+{
+        /*Creating a promt*/
+        char *input;
+            size_t len = 1;
+        input = (char*) malloc(len * sizeof(char));
+        printf("$ ");
+        getline(&input, &len, stdin);
+
+  /*Splitting the string*/
+  char *p;
+
+  p = strtok (input,",:");
+  while (p!= NULL)
+  {
+    printf ("%s\n",p);
+    p = strtok (NULL, ",:");
+  }
+  return 0;
+}
+vagrant@ubuntu-focal:~/simple_shell/concepts$ gcc -Wall -Werror -pedantic strok.c -o strok
+vagrant@ubuntu-focal:~/simple_shell/concepts$ ./strok
+$ /bin/ls ls
+/bin/ls ls
+
+vagrant@ubuntu-focal:~/simple_shell/concepts$ ./strok
+$ /bin/ls: ls
+/bin/ls
+ ls
+
+vagrant@ubuntu-focal:~/simple_shell/concepts$
+
+```
