@@ -15,8 +15,8 @@ int main(int argc, char *argv[])
     /*cmdline stores value returned by getline */
     cmdline = getline(&input, &len, stdin);
     printf("Command entered: %s", input);
-    printf("Length of input from commandline:\n %lu", cmdline);
-    printf("Length of input(newline + null terminator):\n %lu", len);
+    printf("Length of input read from commandline: %lu\n", cmdline);
+    printf("Length of actual input(newline + null terminator): %lu\n", len);
 
     free(input);
 }
