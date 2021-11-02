@@ -73,5 +73,12 @@ int main(int argc, char *argv[])
 
     free(input);
 }
+vagrant@ubuntu-focal:~/simple_shell/concepts$ gcc -Wall -Werror -pedantic promt.c -o promt
+vagrant@ubuntu-focal:~/simple_shell/concepts$ ./promt
+$ mila
+Command entered: mila
+Length of input read from commandline: 5
+Length of actual input(newline + null terminator): 6
+vagrant@ubuntu-focal:~/simple_shell/concepts$
 ```
 
