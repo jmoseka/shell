@@ -2,7 +2,7 @@
 ======================
 
 -   By Julien Barbier
--   Project to be done in teams of 2 people (Team: Nasir Abdulrasheed, Jamila Moseka)
+-   Project to be done in teams of 2 people (Team: Aminat Oyeniyi, Jamila Moseka)
 
 Concepts
 --------
