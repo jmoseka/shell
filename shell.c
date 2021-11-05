@@ -1,48 +1,50 @@
-#include "shell.h"
-
+#include "holberton.h"
 /**
- * main - Creates a simple UNIX command line interpreter
- * @argc: number of argument 
- * @argv: argument passed to main
- * @environ: the environment
- * Return: 0
+ * main - This is a simple shell created by
+ * Marisol Ramirez Henao and David Alejandro Hincapié
+ * for Holberton School
+ * Return: 0 if success
  */
-int main(int argc, char **argv, char **environ)
+int main(void)
 {
-	char *com = "##--->";
-	char *l = NULL;
-	char **args = NULL;
-	int i = 0, status = 0, arg_numb = 0;
-	static int exit_stat, total;
-	size_t length = 0;
-	ssize_t read = 0;
-	(void)argc, (void)**argv;
+	ssize_t bytes_rd = 0; /** Bytes leídos de un getline*/
+	size_t bf_size = 0; /**Tamaño del buffer*/
+	char *entry = NULL, *arguments[20]; /**String de args que ingresa el usr*/
+	int counter = 1, vf_stat = 0, exist_stat = 0, exit_stat = 0, blt_stat = 0;
 
-	while (TRUE)
+	_printp("$ ", 2);/**prompt mini-shell*/
+	bytes_rd = getline(&entry, &bf_size, stdin); /**sizeof entry, o -1 (EOF))*/
+	while (bytes_rd != -1)
 	{
-		if (isatty(STDINFILENO) == 1)
-			write(STDOUTFILENO, "$", 2);
-
-		read = getline(&l, &length, stdin);
-		++tally;
-		if (spec_char(l, read, &exit_stat) == 127)
-			continue;
-
-		no_new_line(l);
-
-		args = parser(l);
-
-		for (i = 0; args[i]; i++)
-			arg_numb++;
-
-		builtins(l, args, environ, &exit_stat);
-
-		status = _path(args[0], args, environ, &exit_stat);
-
-		_execute(status, args, &exit_stat, &total);
-
-		fflush(stdin);
+		if (*entry != '\n')
+		{
+			fill_args(entry, arguments);
+			if (arguments[0] != NULL)
+			{
+				exist_stat = exist(arguments[0]);/**Exist evalua si path ingresado existe*/
+				if (exist_stat != 0)/**No encontró el archivo*/
+				{
+					vf_stat = verify_path(arguments);
+					if (vf_stat == 0)
+						exit_stat = exec(arguments), free(entry), free(*arguments);
+					else
+					{
+					blt_stat = verify_blt(arguments, exit_stat);
+					if (blt_stat != 0)
+						exit_stat = print_not_found(arguments, counter), free(entry);
+					}
+				}
+				else /**Encontró el archivo*/
+					exit_stat = exec(arguments), free(entry);
+			}
+			else
+				free(entry);
+		}
+		else if (*entry == '\n')
+			free(entry);
+		entry = NULL, counter++;
+		_printp("$ ", 2), bytes_rd = getline(&entry, &bf_size, stdin);
 	}
-	free(line);
-	return (0);
+	last_free(entry);
+	return (exit_stat);
 }
