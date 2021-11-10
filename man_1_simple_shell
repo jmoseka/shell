@@ -1,0 +1,127 @@
+# "2021-01-09" "v1.0" "simple_shell man page"
+
+# shell (1)
+
+----------
+
+### NAME
+
+shell :  Simple Shell
+
+
+### SYNOPSIS
+
+Non interactive mode: echo {arguments} | ./hsh
+
+Interactive mode: ./shell
+
+### DESCRIPTION
+
+Simple Shell is a command line interpreter that accepts commands from the user and converts them into something which the kernel can understand.
+
+### ARGUMENTS
+
+Hsh interprets the first word of the input as the executable file, then it executes the command and exits. If it fails to execute, it exits with an exit status of 0. The shell tries to execute from the current directory, if not found it looks for the executable in the PATH. It only processes alphanumeric characters, underscores, hyphens, dots, slashes followed by tab, a new line or a carriage  return.
+
+
+
+### INVOCATION
+
+
+Compiles with GCC as follow:
+
+
+
+gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
+
+
+
+### FILES
+
+
+
+#### shell.c
+
+Gets the input from the user and handles errors.
+
+
+
+#### header.h
+
+Stores the prototypes of the functions and libraries.
+
+
+
+#### _check_exec.c
+
+Checks the existence of the executable file.
+
+
+
+#### _c_path_array.c
+
+creates an array with paths to the executable file.
+
+
+
+#### _fork.c
+
+It starts a child process when a command is valid.
+
+
+
+#### _getenv.c
+
+Creates a list with the paths stored in the PATH.
+
+
+
+#### _parse_input.c
+
+Splits the user’s input into tokens to be processed.
+
+
+#### _print_prompt.c
+
+Prints the prompt and after a failed command it prints the number of commands processed.
+
+
+
+#### _strchr.c :
+
+Searches the slash or dot in the executable file to determine if it includes the directory.
+
+
+#### _strcmp.c :
+
+Compares the full path with the user’s input.
+
+
+
+#### _string_cat.c :
+
+Concatenates the path with the executable file.
+
+
+
+#### _strlen.c :
+
+Returns the length of a string.
+
+
+
+### EXIT STATUS
+
+
+An exit status of 0 indicates success. If it's different from 0, it indicates failure.
+
+
+### AUTHORS
+
+
+#### Written by:
+
+Aminat Oyeniyi, [https://github.com/Armynerh])
+
+Jamila Moseka, [https://github.com/jmoseka])
+
